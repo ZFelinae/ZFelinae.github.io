@@ -1,0 +1,88 @@
+# Site settings
+title: ZFelinae Blog  #你博客的标题
+SEOTitle: 林荫下de猫 | ZFelinae Blog  #显示在浏览器上搜索的时候显示的标题
+header-img: img/home-bg.jpg #显示在首页的背景图片
+email: 1106556353@qq.com
+description: "嗷嗷嗷喵喵喵"  #网站介绍
+keyword: "ZFelinae" #关键词
+url: "https://ZFelinae.github.io"              # 这个就是填写你的博客地址
+baseurl: ""                             # 这个我们不用填写
+
+
+
+# SNS settings
+RSS: false
+weibo_username:     林荫下de猫
+zhihu_username:     false
+github_username:    ZFelinae
+twitter_username:   false
+#facebook_username:  false
+
+
+
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+gems: [jekyll-paginate]
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+
+
+# Disqus settings评论系统
+#disqus_username: _your_disqus_short_name_
+
+# Duoshuo settings评论系统
+#duoshuo_username: huxblog
+# Share component is depend on Comment so we can NOT use share only.
+#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+
+
+
+
+# Analytics settings网站统计
+# Baidu Analytics网站统计
+#ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+# Google Analytics网站统计
+#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+#ga_domain: auto
+
+
+
+# Sidebar settings侧边栏
+sidebar: true                           # 是否开启侧边栏.
+sidebar-about-description: "累死老子了"  #说点装逼的话
+sidebar-avatar: /img/study.jpg      #个人头像
+
+
+
+# Featured Tags首页标签
+featured-tags: true                     # 是否使用首页标签
+featured-condition-size: 1              # 相同标签数量大于这个数，才会出现在首页
+
+
+
+# Friends
+friends: [
+    {
+        title: "Hux Blog",
+        href: "http://huangxuan.me"
+    }
+]
