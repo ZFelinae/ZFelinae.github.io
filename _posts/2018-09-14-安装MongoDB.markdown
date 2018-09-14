@@ -1,0 +1,124 @@
+---
+layout:     post
+title:      "mongodb安装流程"
+subtitle:   ""
+date:       2018-09-14 11:16:00
+author:     "ZFelinae"
+header-img: "img/post-bg-2015.jpg"
+tags: 教程
+---
+
+> “Mongodb真好用.jpg”
+
+## 安装mongodb[^1]
+
+### 1.新建/etc/yum.repos.d/mongodb.repo
+```java
+vim /etc/yum.repos.d/mongodb.repo
+```
+内容为：
+```java
+[mongodb-org]
+name=MongoDB Repository
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/mongodb/yum/el$releasever/
+gpgcheck=0
+enabled=1
+```
+
+### 2.刷新缓存
+```java
+sudo yum makecache
+```
+
+### 3.安装
+```java
+sudo yum install mongodb-org
+```
+安装过程中会有[Y/N]的是否安装选项，选Y
+
+---
+
+## 更改配置
+
+### 1.更改日志及数据库路径
+**注：如果更改路径后服务无法正常使用，请重置回默认路径**
+
+配置文件路径为/etc/mongod.conf
+```java
+vi /etc/mongod.conf
+```
+将systemLog下的path更改为自己指定的日志文件路径(需要新建空日志文件)
+将storage下的dbPath更改为自己指定的数据库路径
+```java
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /data/service/mongodb/log/mongod.log
+
+# Where and how to store data.
+storage:
+  dbPath: /data/service/mongodb/data
+  journal:
+    enabled: true
+#  engine:
+#  mmapv1:
+#  wiredTiger:
+```
+
+### 2.添加mongoDB至systemd
+在/usr/lib/systemd/system目录下创建mongod.service
+```java
+vim /usr/lib/systemd/system/mongod.service
+```
+内容为：
+```java
+[Unit]
+Description=mongodb database
+
+[Service]
+User=mongod
+Group=mongod
+Environment="OPTIONS=--quiet -f /etc/mongod.conf"
+ExecStart=/usr/bin/mongod $OPTIONS run
+PIDFile=/var/run/mongodb/mongod.pid
+
+[Install]
+WantedBy=multi-user.target
+```
+建立链接：
+```java
+ln -s /usr/lib/systemd/system/mongod.service /etc/systemd/system/multi-user.target.wants/
+```
+重新加载systemctl
+```java
+systemctl daemon-reload
+```
+
+---
+
+## 启动服务
+```java
+sudo service mongod start
+```
+
+---
+
+## 停止服务
+```java
+sudo service mongod stop
+```
+
+---
+
+## 卸载mongodb
+```java
+sudo yum erase $(rpm -qa | grep mongodb-org)
+```
+如果重新安装记得要删掉相应的数据库文件和日志文件，否则启动服务会起冲突
+[^1]:安装包来源：[https://mirrors.tuna.tsinghua.edu.cn/help/mongodb/](https://mirrors.tuna.tsinghua.edu.cn/help/mongodb/)
