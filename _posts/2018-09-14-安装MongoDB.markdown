@@ -4,7 +4,7 @@ title:      "mongodb安装流程"
 subtitle:   ""
 date:       2018-09-14 11:16:00
 author:     "ZFelinae"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/post-mongodb-install.jpg"
 tags: 教程
 ---
 
